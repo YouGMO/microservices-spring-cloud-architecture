@@ -21,7 +21,7 @@ public class BankAccountController {
         return bankAccountRepository.findAll();
     }
 
-    @GetMapping("/bankaccount/{id}")
+    @GetMapping("/bankaccounts/{id}")
     public Optional<BankAccount> bankAccountById(@PathVariable String id){
         return bankAccountRepository.findById(id);
     }
