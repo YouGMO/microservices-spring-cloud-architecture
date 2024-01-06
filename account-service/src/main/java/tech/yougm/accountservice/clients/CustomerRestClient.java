@@ -14,7 +14,8 @@ public interface CustomerRestClient {
     @GetMapping("/customers/{id}")
     @CircuitBreaker(name="customerService", fallbackMethod = "getDefaultCustomer")
     Customer findCustomerById(@PathVariable Long id);
-    
+
+    @CircuitBreaker(name="customerService",fallbackMethod = "getDefaultAllCustomers")
     @GetMapping("/customers")
     List<Customer> allCustomers();
 
@@ -27,5 +28,9 @@ public interface CustomerRestClient {
                 .email("not available")
                 .build();
         return customer;
+    }
+
+    default List<Customer> getDefaultAllCustomers(Exception exception){
+        return List.of();
     }
 }
